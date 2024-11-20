@@ -30,4 +30,5 @@ export default interface MovieFull{
     Production:string;
     Website:string;
     Response:string;
+    Error?:string;
 }
