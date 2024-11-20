@@ -1,7 +1,30 @@
 import axios from 'axios';
 import { randomStringGenerator } from '../utils/commom-utils';
 import MovieResponse from '../interfaces/MovieResponse.interface';
+import MovieFull from '../interfaces/Movie.full.interface';
 
+export const fetchMovieByImdbID =  async (imdbID:string): Promise< MovieFull | null> =>{
+    const apiKey = process.env.OMDB_API_KEY;
+    
+    if (!apiKey) {
+        throw new Error("api key is not set in the environment variables.");
+    }
+
+    try {
+        const apiResponse = await axios.get(`http://www.omdbapi.com/?apikey=${apiKey}&i=${imdbID}&plot=full`);
+        
+        if (apiResponse.data.Response === "False") {
+            console.error(`OMDb API Error: ${apiResponse.data.Error} (IMDb ID: ${imdbID})`);
+            return null;
+        }
+
+        const data: MovieFull = apiResponse.data;
+        return data;
+    } catch (error) {
+        console.error(`API Request Failed: ${error}`);
+        return null;
+    }
+}
 
 export const fetchRandomMovies = async (): Promise<MovieResponse | null> => {
     const apiKey = process.env.OMDB_API_KEY;
