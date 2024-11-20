@@ -1,7 +1,8 @@
-import { Entity, PrimaryColumn, Column } from 'typeorm';
+import { Entity, PrimaryColumn, Column, OneToMany } from 'typeorm';
+import { Rating } from './rating.entity';  // Assuming the Rating entity is in a separate file
 
 @Entity('movies')
-export  class Movie {
+export class Movie {
     @PrimaryColumn()
     imdbID: string;
 
@@ -76,4 +77,36 @@ export  class Movie {
 
     @Column({ nullable: true })
     error: string;
+
+    
+    @OneToMany(() => Rating, (rating) => rating.movie, { cascade: true })
+    ratings?: Rating[];
+    
+    constructor() {
+        this.imdbID = ''; 
+        this.title = ''; 
+        this.year = ''; 
+        this.rated = '';
+        this.released = '';
+        this.runtime = '';
+        this.genre = '';
+        this.director = '';
+        this.writer = '';
+        this.actors = '';
+        this.plot = '';
+        this.language = '';
+        this.country = '';
+        this.awards = '';
+        this.poster = '';
+        this.metascore = '';
+        this.imdbRating = '';
+        this.imdbVotes = '';
+        this.type = '';
+        this.dvd = '';
+        this.boxOffice = '';
+        this.production = '';
+        this.website = '';
+        this.response = '';
+        this.error = '';
+    }
 }

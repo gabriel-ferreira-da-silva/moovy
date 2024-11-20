@@ -2,7 +2,19 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
-import movieRouter from './controllers/MovieController'; // Ensure the file exports the router correctly
+import movieRouter from './controllers/MovieController'; 
+import 'reflect-metadata';  
+import { AppDataSource } from './repository/datasource'; 
+
+AppDataSource.initialize()
+    .then(() => {
+        console.log('Data Source has been initialized!');
+        console.log('Entities:', AppDataSource.entityMetadatas.map(e => e.name));
+    })
+    .catch((error) => {
+        console.error('Error during Data Source initialization:', error);
+    });
+
 
 dotenv.config();
 

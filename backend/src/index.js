@@ -3,22 +3,33 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const express = require('express');
-const bodyParser = require('body-parser');
-require('dotenv').config();
-const movieRouter = require('./controllers/MovieController');
-const app = express();
+const body_parser_1 = __importDefault(require("body-parser"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const MovieController_1 = __importDefault(require("./controllers/MovieController"));
+require("reflect-metadata");
+const datasource_1 = require("./repository/datasource");
+datasource_1.AppDataSource.initialize()
+    .then(() => {
+    console.log('Data Source has been initialized!');
+    console.log('Entities:', datasource_1.AppDataSource.entityMetadatas.map(e => e.name));
+})
+    .catch((error) => {
+    console.error('Error during Data Source initialization:', error);
+});
+dotenv_1.default.config();
+const app = (0, express_1.default)();
 const port = 4000;
 app.use((0, cors_1.default)({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type'],
 }));
-app.use(bodyParser.json());
-app.use(express.json());
-app.use('/api', movieRouter);
+app.use(body_parser_1.default.json());
+app.use(express_1.default.json());
+app.use('/api', MovieController_1.default);
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
-module.exports = app;
+exports.default = app;

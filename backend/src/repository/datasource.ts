@@ -1,5 +1,6 @@
 import { DataSource } from 'typeorm';
 import { Movie } from '../entities/movie.entity';
+import { Rating } from '../entities/rating.entity';
 
 export const AppDataSource = new DataSource({
     type: 'postgres',
@@ -8,7 +9,9 @@ export const AppDataSource = new DataSource({
     username: 'moovyuser',
     password: 'moovyuser',
     database: 'moovydb',
-    entities: [Movie],
     synchronize: true, 
-    logging: true
+    logging: true,
+    entities: [Movie, Rating], 
+    migrations: [],
+    subscribers: [],
 });

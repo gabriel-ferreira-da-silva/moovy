@@ -2,6 +2,8 @@ import axios from 'axios';
 import { randomStringGenerator } from '../utils/commom-utils';
 import MovieResponse from '../interfaces/MovieResponse.interface';
 import MovieFull from '../interfaces/Movie.full.interface';
+import { insertMovie } from '../repository/movie.repository';
+import { convertToMovieFullInterface } from '../mapper/mapper';
 
 export const fetchMovieByImdbID =  async (imdbID:string): Promise< MovieFull | null> =>{
     const apiKey = process.env.OMDB_API_KEY;
@@ -23,6 +25,20 @@ export const fetchMovieByImdbID =  async (imdbID:string): Promise< MovieFull | n
     } catch (error) {
         console.error(`API Request Failed: ${error}`);
         return null;
+    }
+}
+
+export const insertMovieInDatabase = async (moviefullJson:any): Promise<any>=>{
+   
+    try {
+
+        const movieFullInterface = convertToMovieFullInterface(moviefullJson);
+        const data =  await insertMovie(movieFullInterface);
+        return data;
+
+    } catch (error) {
+        console.error(`API Request Failed: ${error}`);
+        return {message:"error in insertMovieInDatabase service function", error: error};
     }
 }
 
@@ -62,3 +78,4 @@ export const fetchRandomMovies = async (): Promise<MovieResponse | null> => {
 
     return response;
 };
+
