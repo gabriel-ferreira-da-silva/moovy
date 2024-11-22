@@ -21,7 +21,7 @@ export default function Navbar(){
                     L44.574,161.767z M328.79,161.767h-28.896l28.896-28.883V161.767z"/>
                     
             </svg>
-                Moovy
+                moovy
             </div>
 
             <div className={style.navoption}>
