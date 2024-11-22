@@ -1,19 +1,21 @@
 import React from "react";
 import style from './style.module.css';
+import starIcon from './star.svg'; 
 
 export default function MovieCard({movie}){
     return(
         <div className={style.card}>
-            <img src={style.Poster}></img>
+            <img className={style.poster} src={movie.Poster}></img>
             <div className={style.titleHolder}>
                 <div className={style.title}> {movie.Title}</div>
                 <div className={style.ratingHolder}>
-                    <img src="star.svg"></img>
+                    <img src={starIcon} className={style.ratingIcon}></img>
                     <div className={style.rating}>{movie.Rating}</div>
                 </div>
-                <button className={style.addButton}>
-                    Add to My Library
-                </button>
+                
+            </div>
+            <div className={style.addButton}>
+                Add to My Library
             </div>
         </div>
     );

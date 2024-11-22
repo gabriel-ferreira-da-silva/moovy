@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.fetchRandomMovies = exports.insertMovieInDatabase = exports.fetchMovieByImdbID = void 0;
+exports.fetchRandomMovies = exports.insertMovieInDatabase = exports.fetchMovieSearch = exports.fetchMovieByImdbID = void 0;
 const axios_1 = __importDefault(require("axios"));
 const commom_utils_1 = require("../utils/commom-utils");
 const movie_repository_1 = require("../repository/movie.repository");
@@ -37,6 +37,19 @@ const fetchMovieByImdbID = (imdbID) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.fetchMovieByImdbID = fetchMovieByImdbID;
+const fetchMovieSearch = (title) => __awaiter(void 0, void 0, void 0, function* () {
+    const apiKey = process.env.OMDB_API_KEY;
+    if (!apiKey)
+        throw new Error("API key is not set in the environment variables.");
+    const apiResponse = yield axios_1.default.get(`http://www.omdbapi.com/?s=${title}&apiKey=${apiKey}&page=1`);
+    if (apiResponse.data.Response === "False") {
+        console.log(`failed to fetch search ${title}`);
+        console.log(apiResponse.data.Error);
+    }
+    ;
+    return apiResponse.data.Search;
+});
+exports.fetchMovieSearch = fetchMovieSearch;
 const insertMovieInDatabase = (moviefullJson) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const movieFullInterface = (0, mapper_1.convertToMovieFullInterface)(moviefullJson);

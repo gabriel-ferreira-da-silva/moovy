@@ -28,6 +28,22 @@ export const fetchMovieByImdbID =  async (imdbID:string): Promise< MovieFull | n
     }
 }
 
+
+export const fetchMovieSearch = async (title: string): Promise<MovieFull[]> => {
+    const apiKey = process.env.OMDB_API_KEY;
+    if (!apiKey) throw new Error("API key is not set in the environment variables.");
+
+    const apiResponse = await axios.get(`http://www.omdbapi.com/?s=${title}&apiKey=${apiKey}&page=1`);
+    if (apiResponse.data.Response === "False"){
+        console.log(`failed to fetch search ${title}`);
+        console.log(apiResponse.data.Error);
+        return [];
+    };
+
+    return apiResponse.data.Search;
+};
+
+
 export const insertMovieInDatabase = async (moviefullJson:any): Promise<any>=>{
    
     try {

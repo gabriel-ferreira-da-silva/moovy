@@ -3,6 +3,7 @@ import dotenv from 'dotenv';
 import { fetchRandomMovies} from '../services/MovieService';
 import { fetchMovieByImdbID} from '../services/MovieService';
 import { insertMovieInDatabase } from '../services/MovieService';
+import { fetchMovieSearch } from '../services/MovieService';
 
 dotenv.config();
 
@@ -18,6 +19,11 @@ router.get('/movies', async (req: Request, res: Response): Promise<void> => {
     }
 });
 
+router.get('/movies/search/:title', async (req: Request, res: Response) => {
+    const {title} = req.params;
+    const response = await fetchMovieSearch(title);
+    res.status(200).json(response);
+});
 
 router.get('/movies/imdbID/:imdbID', async (req: Request, res: Response): Promise<void> => {
     try {

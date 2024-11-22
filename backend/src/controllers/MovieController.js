@@ -17,6 +17,7 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const MovieService_1 = require("../services/MovieService");
 const MovieService_2 = require("../services/MovieService");
 const MovieService_3 = require("../services/MovieService");
+const MovieService_4 = require("../services/MovieService");
 dotenv_1.default.config();
 const router = (0, express_1.Router)();
 router.get('/movies', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -28,6 +29,11 @@ router.get('/movies', (req, res) => __awaiter(void 0, void 0, void 0, function* 
         console.error('Error in /movies route:', error);
         res.status(500).json({ message: 'Failed to fetch movies' });
     }
+}));
+router.get('/movies/search/:title', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { title } = req.params;
+    const response = yield (0, MovieService_4.fetchMovieSearch)(title);
+    res.status(200).json(response);
 }));
 router.get('/movies/imdbID/:imdbID', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {

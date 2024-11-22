@@ -1,9 +1,45 @@
 @import url(../commom/comom-style.module.css);
 
-.card{  
+
+.card {  
     display: flex;
-    flex-direction: column;   
-    width: 100px;
-    height: 200px;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px; 
+    width: 250px; 
+    margin:30px; 
+    padding: 10px;
+    border-radius: 10px; 
+    background-color: #fff; 
+    box-sizing: border-box;
+    transition: transform 0.2s ease-in-out;
 }
 
+.card .poster{
+    border-radius: 10px;
+    width: 220px;
+    height: 300px;
+    align-self: center;
+}
+
+.card .titleHolder{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+}
+
+.ratingIcon{
+    width: 20px;
+}
+
+.addButton{
+    display: flex;
+    padding: 3px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    background-color: var(--green);
+    color: var(--green-dark);
+    border-radius: 5px;
+
+}

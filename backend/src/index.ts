@@ -1,6 +1,5 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
-import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import movieRouter from './controllers/MovieController'; 
 import 'reflect-metadata';  
@@ -28,9 +27,6 @@ app.use(
     allowedHeaders: ['Content-Type'],
   })
 );
-
-app.use(bodyParser.json());
-app.use(express.json());
 
 app.use('/api', movieRouter);
 

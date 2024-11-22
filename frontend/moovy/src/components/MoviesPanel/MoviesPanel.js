@@ -6,11 +6,12 @@ export default function MoviesPanel({movies}){
     return(
         <div className={style.container}>
             
-            {movies.map((index, movie)=>{
+            {movies.map((movie, index) => (
                 <MovieCard
-                movie={movie}
-                ></MovieCard>
-            })}
+                    key={index} 
+                    movie={movie}
+                />
+            ))}
 
         </div>
     )
