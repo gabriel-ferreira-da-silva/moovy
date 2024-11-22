@@ -4,7 +4,7 @@ import MoviesPanel from "../components/MoviesPanel/MoviesPanel";
 import { fetchMovieSearch } from "../services/Movie.service";
 import NoResultsPanel from "../components/NoResultsPanel/NoResultsPanel";
 
-export default function MainPage() {
+export default function SearchPage() {
   const [movies, setMovies] = useState([]);
   const [title, setTitle] = useState("");
 
@@ -20,7 +20,7 @@ export default function MainPage() {
 
   return (
     <div>
-      <SearchPanel setString={setTitle} SearchCall={fetchMoviesWrapper} />
+      <SearchPanel pageText="Search" setTitle={setTitle} SearchCall={fetchMoviesWrapper} />
 
       {movies.length !== 0 ? (
         <MoviesPanel movies={movies} />

@@ -1,14 +1,14 @@
 import React from "react";
 import style from "./style.module.css";
 
-export default function SearchPanel({ setString, SearchCall }) {
+export default function SearchPanel({ pageText,setTitle, SearchCall }) {
   function handleInputChange(event) {
-    setString(event.target.value);
+    setTitle(event.target.value);
   }
 
   return (
     <div className={style.panel}>
-      <div className={style.label}>Search</div>
+      <div className={style.label}>{pageText}</div>
 
       <div className={style.searchBar}>
         <input

@@ -1,5 +1,6 @@
 import React from "react";
 import style from './style.module.css';
+import { Link } from "react-router-dom";
 export default function Navbar(){
     return (
         <div className={style.panel} >
@@ -24,13 +25,13 @@ export default function Navbar(){
                 moovy
             </div>
 
-            <div className={style.navoption}>
+            <Link to="/" className={style.navoption}>
                 Search
-            </div>
+            </Link>
 
-            <div className={style.navoption}>
-                My Library
-            </div>
+            <Link to="/library" className={style.navoption}>
+                Library
+            </Link>
         </div>
     );
 }
