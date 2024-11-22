@@ -42,12 +42,7 @@ const fetchMovieSearch = (title) => __awaiter(void 0, void 0, void 0, function* 
     if (!apiKey)
         throw new Error("API key is not set in the environment variables.");
     const apiResponse = yield axios_1.default.get(`http://www.omdbapi.com/?s=${title}&apiKey=${apiKey}&page=1`);
-    if (apiResponse.data.Response === "False") {
-        console.log(`failed to fetch search ${title}`);
-        console.log(apiResponse.data.Error);
-    }
-    ;
-    return apiResponse.data.Search;
+    return apiResponse.data.Search ? apiResponse.data.Search : [];
 });
 exports.fetchMovieSearch = fetchMovieSearch;
 const insertMovieInDatabase = (moviefullJson) => __awaiter(void 0, void 0, void 0, function* () {
