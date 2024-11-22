@@ -1,0 +1,5 @@
+@import url(../commom/comom-style.module.css);
+
+.container{
+    display: flex;
+}
