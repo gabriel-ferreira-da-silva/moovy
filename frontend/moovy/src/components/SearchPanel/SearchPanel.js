@@ -1,7 +1,20 @@
 import React from "react";
 import style from "./style.module.css";
 
-export default function SearchPanel() {
+export default function SearchPanel({setString, SearchCall}) {
+  
+  let title = "";
+
+  function handleInputChange(event) {
+    title = event.target.values;
+  }
+
+  
+  function handleSearchClick() {
+    setString(title);
+    SearchCall();
+  }
+
   return (
     <div className={style.panel}>
       <div className={style.label}>Search</div>
@@ -12,9 +25,12 @@ export default function SearchPanel() {
           className={style.input}
           type="text"
           placeholder="Type to search..."
+          onChange={(event) => setString(event.target.value)}
         />
 
-        <button className={style.searchButton}>
+        <button 
+          className={style.searchButton} 
+          onClick={handleSearchClick}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="20px"

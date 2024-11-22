@@ -13,7 +13,7 @@
   }
   
   .label {
-    font-size: 16px;
+    font-size: 25px;
     font-weight: bold;
     color: black;
   }
@@ -48,13 +48,15 @@
     color: #333;
   }
   
-  .searchButton:active {
+
+  .searchButton:hover {
     color: var(--gold)
   }
 
-  .searchButton:hover {
+  .searchButton:active{
     color: var(--blue-dark)
   }
+
   
   .searchButton svg {
     width: 20px;

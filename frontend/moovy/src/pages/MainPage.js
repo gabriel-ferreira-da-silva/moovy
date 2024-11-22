@@ -3,30 +3,33 @@ import { useState } from "react";
 import { useEffect } from "react";
 import SearchPanel from "../components/SearchPanel/SearchPanel";
 import MoviesPanel from "../components/MoviesPanel/MoviesPanel";
-import { fetchRandomMovies } from "../services/Movie.service";
+import { fetchMovieSearch } from "../services/Movie.service";
 
 export default function MainPage(){
     const [movies,setMovies] = useState([]);
+    const [title, setTitle] = useState("");
+    
+    const fetchMovies = async (movieTitle) => {
+        const response = await fetchMovieSearch(movieTitle);
+        console.log(title);
+        setMovies(response);
+    };
+
+    
 
     useEffect(()=>{
-        const fetchMovies = async () => {
-            const response = await fetchRandomMovies();
-            console.log("**************");
-            console.log("**************");
-            console.log("**************");
-            console.log(response);
-            setMovies(response)
-        };
-
-        fetchMovies();
+        setMovies([]);
     },[]);
-    
+
     return(
         <div>
-            <SearchPanel></SearchPanel> 
+            <SearchPanel
+                setString={setTitle}
+                SearchCall={()=> fetchMovies(title)}
+            ></SearchPanel> 
             
             <MoviesPanel
-            movies={movies}
+                movies={movies}
             ></MoviesPanel>   
         </div>
     );
