@@ -35,11 +35,21 @@
 .addButton{
     display: flex;
     padding: 3px;
+    
     justify-content: center;
     align-content: center;
     align-items: center;
     background-color: var(--green);
     color: var(--green-dark);
     border-radius: 5px;
+    cursor: pointer;
+}
 
+.addButton:hover{
+    color: white;
+}
+
+
+.addButton:active{
+    background-color:var(--green-dark);
 }

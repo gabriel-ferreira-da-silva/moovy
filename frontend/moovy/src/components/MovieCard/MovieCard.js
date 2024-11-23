@@ -2,7 +2,7 @@ import React from "react";
 import style from './style.module.css';
 import starIcon from './star.svg'; 
 
-export default function MovieCard({movie}){
+export default function MovieCard({movie,callback}){
     return(
         <div className={style.card}>
             <img className={style.poster} src={movie.Poster}></img>
@@ -14,7 +14,7 @@ export default function MovieCard({movie}){
                 </div>
                 
             </div>
-            <div className={style.addButton}>
+            <div className={style.addButton} onClick={() => callback(movie.imdbID)}>
                 Add to My Library
             </div>
         </div>

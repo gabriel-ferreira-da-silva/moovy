@@ -20,6 +20,16 @@ export const fetchMovieSearch = async (title)=>{
     }
 };
 
+
+export const saveMovieInLibrary = async (imdbID)=>{
+    try {
+        const response = await axios.post(`http://localhost:4000/api/movies/${imdbID}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching avalilable movies for endpoint http://localhost:4000/api/movies/:', error);
+    }
+};
+
 export const deleteMovieFromLibrary = async (imdbID)=>{
     try {
         const response = await axios.delete(`http://localhost:4000/api/movies/library/${imdbID}`);

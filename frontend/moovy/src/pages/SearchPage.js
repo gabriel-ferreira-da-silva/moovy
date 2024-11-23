@@ -3,6 +3,7 @@ import SearchPanel from "../components/SearchPanel/SearchPanel";
 import MoviesPanel from "../components/MoviesPanel/MoviesPanel";
 import { fetchMovieSearch } from "../services/Movie.service";
 import NoResultsPanel from "../components/NoResultsPanel/NoResultsPanel";
+import { saveMovieInLibrary } from "../services/Movie.service";
 
 export default function SearchPage() {
   const [movies, setMovies] = useState([]);
@@ -14,6 +15,11 @@ export default function SearchPage() {
     setMovies(response);
   };
 
+  const saveMovie = async (imdbID) => {
+    const response = await saveMovieInLibrary(imdbID);
+    console.log(response);
+  }
+
   const fetchMoviesWrapper = async () => {
     await fetchMovies(title);
   };
@@ -23,7 +29,7 @@ export default function SearchPage() {
       <SearchPanel pageText="Search" setTitle={setTitle} SearchCall={fetchMoviesWrapper} />
 
       {movies.length !== 0 ? (
-        <MoviesPanel movies={movies} />
+        <MoviesPanel movies={movies} movieCardCallback={saveMovie}/>
       ) : (
         <NoResultsPanel
           message="Nenhum filme com este título foi encontrado ou você pesquisou usando termos inválidos"

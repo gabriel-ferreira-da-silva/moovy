@@ -2,7 +2,7 @@ import React from "react";
 import MovieCard from "../MovieCard/MovieCard";
 import style from "./style.module.css";
 
-export default function MoviesPanel({movies}){
+export default function MoviesPanel({movies,movieCardCallback}){
     if (!movies || movies.length === 0) {
         return <div></div>;
     }
@@ -13,6 +13,7 @@ export default function MoviesPanel({movies}){
                 <MovieCard
                     key={index} 
                     movie={movie}
+                    callback={movieCardCallback}
                 />
             ))}
 
