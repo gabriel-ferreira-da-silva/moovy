@@ -1,9 +1,10 @@
 import { Router, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import { fetchRandomMovies} from '../services/MovieService';
+import { fetchRandomMovies, removeMovieFromDatabase} from '../services/MovieService';
 import { fetchMovieByImdbID} from '../services/MovieService';
 import { insertMovieInDatabase } from '../services/MovieService';
 import { fetchMovieSearch } from '../services/MovieService';
+import { fetchMoviesFromDatabase } from '../services/MovieService';
 
 dotenv.config();
 
@@ -12,6 +13,17 @@ const router = Router();
 router.get('/movies', async (req: Request, res: Response): Promise<void> => {
     try {
         const response = await fetchRandomMovies();
+        res.status(200).json(response); 
+    } catch (error) {
+        console.error('Error in /movies route:', error);
+        res.status(500).json({ message: 'Failed to fetch movies' }); 
+    }
+});
+
+
+router.get('/movies/library', async (req: Request, res: Response): Promise<void> => {
+    try {
+        const response = await fetchMoviesFromDatabase();
         res.status(200).json(response); 
     } catch (error) {
         console.error('Error in /movies route:', error);
@@ -54,6 +66,20 @@ router.post('/movies/:imdbID', async (req: Request, res: Response): Promise<void
             console.log("error");
             res.status(500).json({message: "error inserting in database" , error: error});
         }
+    } catch (error) {
+        console.error('Error in /movies route:', error);
+        res.status(500).json({ message: 'Failed to fetch movies' }); 
+    }
+});
+
+
+
+router.delete('/movies/library/:imdbID', async (req: Request, res: Response): Promise<void> => {
+    try {
+        const { imdbID } = req.params;
+        const response = await removeMovieFromDatabase(imdbID);
+        res.status(200).json(response);
+        
     } catch (error) {
         console.error('Error in /movies route:', error);
         res.status(500).json({ message: 'Failed to fetch movies' }); 

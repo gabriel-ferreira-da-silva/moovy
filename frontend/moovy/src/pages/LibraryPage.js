@@ -26,7 +26,7 @@ export default function LibraryPage() {
         <MoviesPanel movies={movies} />
       ) : (
         <NoResultsPanel
-          message="Nenhum filme com este título foi encontrado ou você pesquisou usando termos inválidos"
+          message="Nenhum filme com este título foi encontrado na sua biblioteca ou você pesquisou usando termos inválidos"
         />
       )}
     </div>

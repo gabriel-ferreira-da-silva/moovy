@@ -18,11 +18,22 @@ const MovieService_1 = require("../services/MovieService");
 const MovieService_2 = require("../services/MovieService");
 const MovieService_3 = require("../services/MovieService");
 const MovieService_4 = require("../services/MovieService");
+const MovieService_5 = require("../services/MovieService");
 dotenv_1.default.config();
 const router = (0, express_1.Router)();
 router.get('/movies', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield (0, MovieService_1.fetchRandomMovies)();
+        res.status(200).json(response);
+    }
+    catch (error) {
+        console.error('Error in /movies route:', error);
+        res.status(500).json({ message: 'Failed to fetch movies' });
+    }
+}));
+router.get('/movies/library', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield (0, MovieService_5.fetchMoviesFromDatabase)();
         res.status(200).json(response);
     }
     catch (error) {
@@ -62,6 +73,17 @@ router.post('/movies/:imdbID', (req, res) => __awaiter(void 0, void 0, void 0, f
             console.log("error");
             res.status(500).json({ message: "error inserting in database", error: error });
         }
+    }
+    catch (error) {
+        console.error('Error in /movies route:', error);
+        res.status(500).json({ message: 'Failed to fetch movies' });
+    }
+}));
+router.delete('/movies/library/:imdbID', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { imdbID } = req.params;
+        const response = yield (0, MovieService_1.removeMovieFromDatabase)(imdbID);
+        res.status(200).json(response);
     }
     catch (error) {
         console.error('Error in /movies route:', error);
