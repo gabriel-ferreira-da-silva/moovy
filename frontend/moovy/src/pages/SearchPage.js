@@ -23,13 +23,11 @@ export default function SearchPage() {
 
   const saveMovie = async (imdbID) => {
     const response = await saveMovieInLibrary(imdbID);
-    console.log("h**********************")
-    console.log(JSON.stringify(response));
 
     if (response.success) {
-      setMessage(<Alert severity="success" variant="filled" >Movie saved successfully.</Alert>);
+      setMessage(<Alert severity="success" variant="filled" >Movie saved in library successfully.</Alert>);
     } else {
-      setMessage(<Alert severity="error" variant="filled" >Movie could not be saved </Alert>);
+      setMessage(<Alert severity="error" variant="filled" >Movie could not be saved in library</Alert>);
     }
     setShowMessage(true);
 

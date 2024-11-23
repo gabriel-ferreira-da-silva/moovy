@@ -3,6 +3,8 @@ import style from './style.module.css';
 import starIcon from './star.svg'; 
 
 export default function MovieFullCard({movie, callBack}){
+    movie.title = movie.title.length > 33 ? movie.title.slice(0, 30) + "..." : movie.title;
+
     return(
         <div className={style.card}>
             <img className={style.poster} src={movie.poster}></img>
