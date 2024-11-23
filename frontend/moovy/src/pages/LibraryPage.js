@@ -19,10 +19,6 @@ export default function LibraryPage() {
   const [message, setMessage] = useState(""); 
   const [showMessage, setShowMessage] = useState(null);
 
-  const deleteMovie = async (imdbID) => {
-    const response = await deleteMovieFromLibrary(imdbID);
-  };
-
   const fetchMoviesWrapper = async () => {
     await fetchMovies();
   };
@@ -30,9 +26,7 @@ export default function LibraryPage() {
 
   const deleteMovieWrapper = async (imdbID) => {
     const response  = await deleteMovieFromLibrary(imdbID);
-    console.log(response.data); 
-    console.log("h**********************")
-    console.log(JSON.stringify(response));
+    console.log(response.data);
 
     if (response.success) {
       setMessage(<Alert severity="success" variant="filled" >Movie delete successfully.</Alert>);
@@ -40,13 +34,16 @@ export default function LibraryPage() {
       setMessage(<Alert severity="error" variant="filled" >Movie could not be delete </Alert>);
     }
     setShowMessage(true);
+    const updatedMovies = movies.filter((movie) => movie.imdbID !== imdbID);
+    setMovies(updatedMovies);
 
-    setTimeout(() => setShowMessage(false), 3000);   
+    setTimeout(() => setShowMessage(false), 3000); 
   };
 
   useEffect(()=>{
     fetchMoviesWrapper();
   },[])
+
 
   return (
     <div>
