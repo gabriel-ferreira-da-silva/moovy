@@ -53,14 +53,21 @@
     margin-right: 5px;
 }
 
-.addButton{
+.deleteButton{
     display: flex;
     padding: 3px;
     justify-content: center;
     align-content: center;
     align-items: center;
-    background-color: var(--green);
-    color: var(--green-dark);
+    background-color: var(--red);
+    color: var(--red-dark);
     border-radius: 5px;
+}
 
+.deleteButton:hover{
+    color:white;
+}
+
+.delete:active{
+    background-color: var(--red-dark);
 }
