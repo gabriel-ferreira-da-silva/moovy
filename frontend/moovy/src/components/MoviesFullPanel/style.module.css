@@ -1,0 +1,13 @@
+@import url(../commom/comom-style.module.css);
+
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px; 
+    padding: 1%; 
+    justify-content: center;
+    align-items: start; 
+    box-sizing: border-box;
+    width: 90%;
+}

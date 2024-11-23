@@ -19,3 +19,22 @@ export const fetchMovieSearch = async (title)=>{
         console.error('Error fetching avalilable movies for endpoint http://localhost:4000/api/movies/:', error);
     }
 };
+
+export const deleteMovieFromLibrary = async (imdbID)=>{
+    try {
+        const response = await axios.delete(`http://localhost:4000/api/movies/library/${imdbID}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching avalilable movies for endpoint http://localhost:4000/api/movies/:', error);
+    }
+};
+
+
+export const fetchMoviesFromLibrary = async ()=>{
+    try {
+        const response = await axios.get(`http://localhost:4000/api/movies/library`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching avalilable movies for endpoint http://localhost:4000/api/movies/:', error);
+    }
+};
