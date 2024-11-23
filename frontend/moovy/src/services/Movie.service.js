@@ -26,7 +26,7 @@ export const saveMovieInLibrary = async (imdbID)=>{
         const response = await axios.post(`http://localhost:4000/api/movies/${imdbID}`);
         return response.data;
     } catch (error) {
-        console.error('Error fetching avalilable movies for endpoint http://localhost:4000/api/movies/:', error);
+        console.log('error inserting movie in library');
     }
 };
 

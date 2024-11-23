@@ -21,10 +21,10 @@ function insertMovie(movieFullInterface) {
             let movie = (0, mapper_1.convertToMovieFullEntity)(movieFullInterface);
             const movieRepository = datasource_1.AppDataSource.getRepository(movie_entity_1.Movie);
             const result = yield movieRepository.save(movie);
-            return { result: result };
+            return { result: true };
         }
         catch (error) {
-            return { message: "failed to insertMovie in repository level", error: error };
+            return { result: false, error: error };
         }
     });
 }
@@ -33,7 +33,7 @@ function getMoviesFromDatabase() {
         try {
             const movieRepository = datasource_1.AppDataSource.getRepository(movie_entity_1.Movie);
             const movies = yield movieRepository.find();
-            return { movies };
+            return { result: movies };
         }
         catch (error) {
             return { message: "Failed to fetch movies from repository level", error: error };
@@ -48,10 +48,10 @@ function deleteMovieFromDatabase(imdbID) {
             if (result.affected === 0) {
                 return { message: `No movie found with imdbID: ${imdbID}`, result };
             }
-            return { message: `Movie with imdbID: ${imdbID} successfully deleted`, result };
+            return { result: result, success: true };
         }
         catch (error) {
-            return { message: "Failed to delete movie from repository level", error };
+            return { message: "Failed to delete movie from repository level", error, success: false };
         }
     });
 }

@@ -4,6 +4,7 @@ import MoviesFullPanel from "../components/MoviesFullPanel/MoviesFullPanel";
 import { fetchMoviesFromLibrary } from "../services/Movie.service";
 import { deleteMovieFromLibrary } from "../services/Movie.service";
 import NoResultsPanel from "../components/NoResultsPanel/NoResultsPanel";
+import { Alert } from "@mui/material";
 
 export default function LibraryPage() {
   const [movies, setMovies] = useState([]);
@@ -11,13 +12,15 @@ export default function LibraryPage() {
 
   const fetchMovies = async () => {
     const response = await fetchMoviesFromLibrary();
-    console.log(`response ${response.movies}`);
-    setMovies(response.movies);
+    console.log(`response ${JSON.stringify(response.result)}`);
+    setMovies(response.result);
   };
+
+  const [message, setMessage] = useState(""); 
+  const [showMessage, setShowMessage] = useState(null);
 
   const deleteMovie = async (imdbID) => {
     const response = await deleteMovieFromLibrary(imdbID);
-    console.log(response.data);    
   };
 
   const fetchMoviesWrapper = async () => {
@@ -26,7 +29,19 @@ export default function LibraryPage() {
 
 
   const deleteMovieWrapper = async (imdbID) => {
-    await deleteMovieFromLibrary(imdbID)
+    const response  = await deleteMovieFromLibrary(imdbID);
+    console.log(response.data); 
+    console.log("h**********************")
+    console.log(JSON.stringify(response));
+
+    if (response.success) {
+      setMessage(<Alert severity="success" variant="filled" >Movie delete successfully.</Alert>);
+    } else {
+      setMessage(<Alert severity="error" variant="filled" >Movie could not be delete </Alert>);
+    }
+    setShowMessage(true);
+
+    setTimeout(() => setShowMessage(false), 3000);   
   };
 
   useEffect(()=>{
@@ -35,6 +50,8 @@ export default function LibraryPage() {
 
   return (
     <div>
+      {showMessage && message}
+
       <SearchPanel pageText="My Library" setTitle={setTitle} SearchCall={fetchMoviesWrapper} />
 
       {movies.length !== 0 ? (

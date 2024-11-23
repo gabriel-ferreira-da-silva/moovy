@@ -8,9 +8,9 @@ export async function insertMovie(movieFullInterface: MovieFullInterface) {
         let movie: Movie = convertToMovieFullEntity(movieFullInterface);
         const movieRepository = AppDataSource.getRepository(Movie);
         const result = await movieRepository.save(movie);
-        return {result:result};
+        return {result:true};
     }catch(error){
-        return {message:"failed to insertMovie in repository level" , error:error}
+        return {result:false,  error:error}
     }    
 }
 
@@ -36,9 +36,8 @@ export async function deleteMovieFromDatabase(imdbID: string) {
         if (result.affected === 0) {
             return { message: `No movie found with imdbID: ${imdbID}`, result };
         }
-
-        return { message: `Movie with imdbID: ${imdbID} successfully deleted`, result };
+        return {result:result, success:true};
     } catch (error) {
-        return { message: "Failed to delete movie from repository level", error };
+        return { message: "Failed to delete movie from repository level", error , success:false};
     }
 }

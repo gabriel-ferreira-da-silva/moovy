@@ -62,32 +62,32 @@ router.post('/movies/:imdbID', (req, res) => __awaiter(void 0, void 0, void 0, f
         const { imdbID } = req.params;
         const response = yield (0, MovieService_2.fetchMovieByImdbID)(imdbID);
         if (response === null || response === void 0 ? void 0 : response.Error) {
-            res.status(500).json({ message: 'failed to fetch movie' });
+            res.status(500).json({ message: 'failed to fetch movie', success: false });
             return;
         }
         try {
             const postResponse = yield (0, MovieService_3.insertMovieInDatabase)(response);
-            res.status(500).json(postResponse);
+            res.status(200).json({ result: postResponse, success: true });
         }
         catch (error) {
             console.log("error");
-            res.status(500).json({ message: "error inserting in database", error: error });
+            res.status(200).json({ message: "error inserting in database", error: error, success: false });
         }
     }
     catch (error) {
         console.error('Error in /movies route:', error);
-        res.status(500).json({ message: 'Failed to fetch movies' });
+        res.status(500).json({ message: 'Failed to fetch movies', success: false, error: error });
     }
 }));
 router.delete('/movies/library/:imdbID', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { imdbID } = req.params;
         const response = yield (0, MovieService_1.removeMovieFromDatabase)(imdbID);
-        res.status(200).json(response);
+        res.status(200).json({ result: response, success: true });
     }
     catch (error) {
         console.error('Error in /movies route:', error);
-        res.status(500).json({ message: 'Failed to fetch movies' });
+        res.status(500).json({ message: 'Failed to fetch movies', success: false });
     }
 }));
 exports.default = router;

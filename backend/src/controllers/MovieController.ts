@@ -55,20 +55,20 @@ router.post('/movies/:imdbID', async (req: Request, res: Response): Promise<void
         const response = await fetchMovieByImdbID(imdbID);
         
         if (response?.Error){
-            res.status(500).json({message: 'failed to fetch movie'})
+            res.status(500).json({message: 'failed to fetch movie', success:false})
             return;
         }
 
         try {
             const postResponse = await insertMovieInDatabase(response);
-            res.status(500).json(postResponse);
+            res.status(200).json({result:postResponse, success:true});
         } catch (error){
             console.log("error");
-            res.status(500).json({message: "error inserting in database" , error: error});
+            res.status(200).json({message: "error inserting in database" , error: error,success:false});
         }
     } catch (error) {
         console.error('Error in /movies route:', error);
-        res.status(500).json({ message: 'Failed to fetch movies' }); 
+        res.status(500).json({ message: 'Failed to fetch movies', success:false, error:error }); 
     }
 });
 
@@ -78,11 +78,11 @@ router.delete('/movies/library/:imdbID', async (req: Request, res: Response): Pr
     try {
         const { imdbID } = req.params;
         const response = await removeMovieFromDatabase(imdbID);
-        res.status(200).json(response);
+        res.status(200).json({result: response, success:true);
         
     } catch (error) {
         console.error('Error in /movies route:', error);
-        res.status(500).json({ message: 'Failed to fetch movies' }); 
+        res.status(500).json({ message: 'Failed to fetch movies' , success:false }); 
     }
 });
 
