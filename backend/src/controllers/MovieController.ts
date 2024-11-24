@@ -78,7 +78,7 @@ router.delete('/movies/library/:imdbID', async (req: Request, res: Response): Pr
     try {
         const { imdbID } = req.params;
         const response = await removeMovieFromDatabase(imdbID);
-        res.status(200).json({result: response, success:true);
+        res.status(200).json({result: response, success:true});
         
     } catch (error) {
         console.error('Error in /movies route:', error);
