@@ -6,6 +6,7 @@ export default function MoviesPanel({movies,movieCardCallback}){
     if (!movies || movies.length === 0) {
         return <div></div>;
     }
+    
     return(
         <div className={style.container}>
             

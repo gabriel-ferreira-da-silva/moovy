@@ -5,15 +5,20 @@ import { fetchMoviesFromLibrary } from "../services/Movie.service";
 import { deleteMovieFromLibrary } from "../services/Movie.service";
 import NoResultsPanel from "../components/NoResultsPanel/NoResultsPanel";
 import { Alert } from "@mui/material";
+import { OrbitProgress } from "react-loading-indicators";
 
 export default function LibraryPage() {
   const [movies, setMovies] = useState([]);
   const [title, setTitle] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const fetchMovies = async () => {
+    setLoading(false);
     const response = await fetchMoviesFromLibrary();
     console.log(`response ${JSON.stringify(response.result)}`);
     setMovies(response.result);
+    setLoading(false);
+
   };
 
   const [message, setMessage] = useState(""); 
@@ -51,13 +56,27 @@ export default function LibraryPage() {
 
       <SearchPanel pageText="My Library" setTitle={setTitle} SearchCall={fetchMoviesWrapper} />
 
-      {movies.length !== 0 ? (
-        <MoviesFullPanel movies={movies} movieFullCardCallBack={deleteMovieWrapper}/>
-      ) : (
-        <NoResultsPanel
-          message="Nenhum filme com este título foi encontrado na sua biblioteca ou você pesquisou usando termos inválidos"
-        />
-      )}
+      <div>
+        {movies.length !== 0 ? (
+          <div>
+            {
+              loading ?
+              <div style={{display: "flex", margin:"10%",justifyContent:"center", justifySelf:"center", alignContent:"center", alignSelf:"center"}}>
+                <OrbitProgress dense color="#f5af22" size="large" text="" textColor="" />
+              </div>
+              :
+              <MoviesFullPanel movies={movies} movieCardCallback={deleteMovieWrapper}/>
+            }
+          </div>
+        ) : (
+          <NoResultsPanel
+            message="Nenhum filme com este título foi encontrado ou você pesquisou usando termos inválidos"
+          />
+        )}
+
+      </div>
+
+      
     </div>
   );
 }

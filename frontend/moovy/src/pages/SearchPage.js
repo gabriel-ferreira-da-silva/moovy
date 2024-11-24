@@ -4,22 +4,26 @@ import MoviesPanel from "../components/MoviesPanel/MoviesPanel";
 import { fetchMovieSearch } from "../services/Movie.service";
 import NoResultsPanel from "../components/NoResultsPanel/NoResultsPanel";
 import { saveMovieInLibrary } from "../services/Movie.service";
+import { OrbitProgress } from "react-loading-indicators";
 import Alert from '@mui/material/Alert';
 
 export default function SearchPage() {
   const [movies, setMovies] = useState([]);
   const [title, setTitle] = useState("");
+  const [message, setMessage] = useState(""); 
+  const [showMessage, setShowMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
 
   const fetchMovies = async (movieTitle) => {
+    setLoading(true);
     const response = await fetchMovieSearch(movieTitle);
     console.log(`title is ${movieTitle}`);
     console.log(response);
     setMovies(response);
+    setLoading(false);
   };
 
-  const [message, setMessage] = useState(""); 
-  const [showMessage, setShowMessage] = useState(null);
 
   const saveMovie = async (imdbID) => {
     const response = await saveMovieInLibrary(imdbID);
@@ -46,12 +50,25 @@ export default function SearchPage() {
       
 
       {movies.length !== 0 ? (
-        <MoviesPanel movies={movies} movieCardCallback={saveMovie}/>
+        <div>
+          {
+            loading ?
+            <div style={{display: "flex", margin:"10%",justifyContent:"center", justifySelf:"center", alignContent:"center", alignSelf:"center"}}>
+              <OrbitProgress dense color="#f5af22" size="large" text="" textColor="" />
+            </div>
+            
+            :
+            <MoviesPanel movies={movies} movieCardCallback={saveMovie}/>
+          }
+
+        </div>
       ) : (
         <NoResultsPanel
           message="Nenhum filme com este título foi encontrado ou você pesquisou usando termos inválidos"
         />
       )}
+
+
     </div>
   );
 }
