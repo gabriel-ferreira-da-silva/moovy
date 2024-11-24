@@ -21,15 +21,6 @@
     align-self: center;
 }
 
-.titleHolder{
-    font-size: 20px;
-}
-
-
-.titleHolder .title{
-    font-weight: 500;
-}
-
 .card .titleHolder{
     display: flex;
     flex-direction: row;
@@ -39,21 +30,47 @@
     margin: 5px;
     margin: 5px;
     height:40px;
+
+}
+.titleHolder{
+    font-size: 20px;
+}
+
+.ratingHolder{
+    display: flex;
+    flex-direction: row;
+}
+
+.titleHolder .title{
+    font-weight: 500;
 }
 
 .ratingIcon{
     width: 20px;
 }
 
-.ratingHolder{
+.addButton{
     display: flex;
-    flex-direction: row;
-    padding: 5px;
+    padding: 3px;
+    
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    background-color: var(--green);
+    color: var(--green-dark);
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-.ratingHolder .ratingIcon{
-    margin-right: 5px;
+.addButton:hover{
+    color: white;
 }
+
+
+.addButton:active{
+    background-color:var(--green-dark);
+}
+
 
 .deleteButton{
     display: flex;
