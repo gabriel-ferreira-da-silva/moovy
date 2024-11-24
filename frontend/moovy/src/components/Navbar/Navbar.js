@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import style from './style.module.css';
 import { Link } from "react-router-dom";
 export default function Navbar(){
+    const [option, setOption] = useState("search");
+
     return (
         <div className={style.panel} >
             <div className={style.logoHolder}>
@@ -25,13 +27,34 @@ export default function Navbar(){
                 moovy
             </div>
 
-            <Link to="/" className={style.navoption}>
+            <Link
+                to="/"
+                className={style.navoption}
+                onClick={() => setOption("search")}
+                style={{ color: option === "search" ? "var(--gold)" : "white" }}
+            >
                 Search
             </Link>
 
-            <Link to="/library" className={style.navoption}>
+
+            <Link
+                to="/library"
+                className={style.navoption}
+                onClick={() => setOption("library")}
+                style={{ color: option === "library" ? "var(--gold)" : "white" }}
+            >
                 Library
             </Link>
+
+            <Link
+                to="/"
+                className={style.navoption}
+                onClick={() => setOption("info")}
+                style={{ color: option === "info" ? "var(--gold)" : "white" }}
+            >
+                Info
+            </Link>
+
         </div>
     );
 }
