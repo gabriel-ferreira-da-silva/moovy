@@ -1,1 +1,1 @@
-psql -U your_username -d moovydb -f setup.sql
+psql -U moovyuser -d moovydb -f setup.sql

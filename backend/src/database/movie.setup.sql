@@ -48,3 +48,13 @@ CREATE TABLE IF NOT EXISTS ratings (
     PRIMARY KEY (imdbID, source), 
     FOREIGN KEY (imdbID) REFERENCES movies(imdbID) ON DELETE CASCADE
 );
+
+
+DROP TABLE IF EXISTS reviews;
+CREATE TABLE IF NOT EXISTS reviews (
+    id serial,
+    imdbID TEXT NOT NULL,
+    audio bytea,
+    PRIMARY KEY (id), 
+    FOREIGN KEY (imdbID) REFERENCES movies(imdbID) ON DELETE CASCADE
+);
