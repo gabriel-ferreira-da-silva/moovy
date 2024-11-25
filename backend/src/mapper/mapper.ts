@@ -87,18 +87,19 @@ export const convertToMovieFullEntity = (moviefull: MovieFullInterface): Movie =
 
 export const convertToReviewEntity = (review: ReviewInterface): Review => {
     const reviewEntity = new Review();
-    reviewEntity.id = review.id;
     reviewEntity.imdbID = review.imdbID;
     reviewEntity.audio = review.audio;
     return reviewEntity;
 };
 
-export const convertToReviewInterface = (response: any): ReviewInterface => {
-    return{
-        id: response.id,
-        imdbID: response.imdbID,
-        audio: response.audio
+
+export const convertToReviewInterface = (reviewJSON:any) => {
+    return {
+        id: reviewJSON.id || null, // Use null if id is undefined
+        imdbID: reviewJSON.imdbID,
+        audio: reviewJSON.audio,
     };
-}
+};
+
 
 

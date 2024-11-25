@@ -3,17 +3,17 @@ import { Review } from '../entities/review.entity';
 import ReviewInterface from '../interfaces/Review.interface.'
 import { convertToReviewEntity } from '../mapper/mapper';
 
-export async function insertReview(reviewInterface: ReviewInterface) {
-    try{
-        let review: Review = convertToReviewEntity(reviewInterface);
-        const reviewRepository = AppDataSource.getRepository(Review);
-        const result = await reviewRepository.save(review);
-        return {result:true , response:result};
-    }catch(error){
-        return {result:false,  error:error}
-    }    
-}
 
+export const insertReview = async (data: { imdbID: string; audio: Buffer }) => {
+    const reviewRepository = AppDataSource.getRepository(Review);
+
+    const review = new Review();
+    review.imdbID = data.imdbID;
+    review.audio = data.audio;
+
+    return await reviewRepository.save(review); 
+};
+  
 
 export async function getReviewsFromDatabase() {
     try {

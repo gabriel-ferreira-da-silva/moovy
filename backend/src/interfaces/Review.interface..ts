@@ -1,6 +1,6 @@
 
 export default interface Review {
-    id:number;
+    id?:number;
     imdbID: string;
     audio:Buffer;
 }

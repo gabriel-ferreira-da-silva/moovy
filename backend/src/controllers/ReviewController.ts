@@ -1,11 +1,12 @@
 import { Router, Request, Response } from 'express';
 import dotenv from 'dotenv';
-
+import multer from 'multer';
 import { fetchReviewsFromDatabase } from '../services/ReviewService';
 import { insertReviewInDatabase } from '../services/ReviewService';
 dotenv.config();
 
 const router = Router();
+const upload = multer();
 
 router.get('/reviews', async (req: Request, res: Response): Promise<void> => {
     try {
@@ -18,17 +19,28 @@ router.get('/reviews', async (req: Request, res: Response): Promise<void> => {
 });
 
 
-
-router.post('/reviews', async (req: Request, res: Response): Promise<void> => {
+router.post('/reviews', upload.single('audio'), async (req: Request, res: Response): Promise<void> => {
     try {
-        const data = req.body;
-        const postResponse = await insertReviewInDatabase(data);
-        res.status(200).json({result:postResponse, success:true});
+        const { imdbID } = req.body; // Extract imdbID from request body
+        const audio = req.file?.buffer; // Get the uploaded audio file as a buffer
+
+        console.log('Received imdbID:', imdbID);
+        console.log('Audio file size (bytes):', audio?.length);
+
+        if (!imdbID || !audio) {
+            res.status(400).json({ message: 'imdbID and audio are required' });
+            return;
+        }
+
+        // Insert into database
+        const postResponse = await insertReviewInDatabase({ imdbID, audio });
+        res.status(200).json({ result: postResponse, success: true });
     } catch (error) {
-        console.error('Error in /movies route:', error);
-        res.status(500).json({ message: 'Failed to fetch movies' }); 
+        console.error('Error in /reviews route:', error);
+        res.status(500).json({ message: 'Failed to insert review' });
     }
 });
+
 
 
 

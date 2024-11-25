@@ -79,17 +79,16 @@ const convertToMovieFullEntity = (moviefull) => {
 exports.convertToMovieFullEntity = convertToMovieFullEntity;
 const convertToReviewEntity = (review) => {
     const reviewEntity = new review_entity_1.Review();
-    reviewEntity.id = review.id;
     reviewEntity.imdbID = review.imdbID;
     reviewEntity.audio = review.audio;
     return reviewEntity;
 };
 exports.convertToReviewEntity = convertToReviewEntity;
-const convertToReviewInterface = (response) => {
+const convertToReviewInterface = (reviewJSON) => {
     return {
-        id: response.id,
-        imdbID: response.imdbID,
-        audio: response.audio
+        id: reviewJSON.id || null, // Use null if id is undefined
+        imdbID: reviewJSON.imdbID,
+        audio: reviewJSON.audio,
     };
 };
 exports.convertToReviewInterface = convertToReviewInterface;

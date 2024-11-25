@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
+import { saveReviewInLibrary } from '../../services/Review.service';
 
-export default function AudioRecordPanel() {
+export default function AudioRecordPanel({movie}) {
     
     const [isRecording, setIsRecording] = useState(false);
     const [audioURL, setAudioURL] = useState(null);
@@ -41,14 +42,35 @@ export default function AudioRecordPanel() {
         }
     };
 
-    const saveRecording = () => {
+    const saveRecording = async () => {
         if (audioURL) {
-            const link = document.createElement('a');
-            link.href = audioURL;
-            link.download = 'recording.wav';
-            link.click();
+            try {
+                // Fetch the audio blob from the audioURL
+                const response = await fetch(audioURL);
+                const audioBlob = await response.blob();
+    
+                // Create FormData and append audio and imdbID
+                const formData = new FormData();
+                formData.append('imdbID', movie.imdbID); // Pass movie's imdbID
+                formData.append('audio', audioBlob, 'recording.wav'); // Append audio blob with filename
+    
+                // Call the service to save the review
+                const result = await saveReviewInLibrary(formData);
+    
+                if (result && result.success) {
+                    alert('Recording saved successfully!');
+                } else {
+                    alert('Failed to save the recording.');
+                }
+            } catch (error) {
+                console.error('Error saving recording:', error);
+                alert('An error occurred while saving the recording.');
+            }
+        } else {
+            alert('No audio recorded to save.');
         }
     };
+    
 
     return (
         <div>

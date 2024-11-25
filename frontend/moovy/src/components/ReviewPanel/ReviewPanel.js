@@ -20,7 +20,9 @@ export default function ReviewPanel({movie,isPanelOpen,setIsPanelOpen}){
                 review?
                 <div></div>
                 :
-                <AudioRecordPanel></AudioRecordPanel>
+                <AudioRecordPanel
+                movie={movie}
+                ></AudioRecordPanel>
             }
             <button className={style.closeButton} onClick={togglePanel}>
               Close

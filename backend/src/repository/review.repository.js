@@ -9,24 +9,18 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.insertReview = insertReview;
+exports.insertReview = void 0;
 exports.getReviewsFromDatabase = getReviewsFromDatabase;
 const datasource_1 = require("./datasource");
 const review_entity_1 = require("../entities/review.entity");
-const mapper_1 = require("../mapper/mapper");
-function insertReview(reviewInterface) {
-    return __awaiter(this, void 0, void 0, function* () {
-        try {
-            let review = (0, mapper_1.convertToReviewEntity)(reviewInterface);
-            const reviewRepository = datasource_1.AppDataSource.getRepository(review_entity_1.Review);
-            const result = yield reviewRepository.save(review);
-            return { result: true, response: result };
-        }
-        catch (error) {
-            return { result: false, error: error };
-        }
-    });
-}
+const insertReview = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    const reviewRepository = datasource_1.AppDataSource.getRepository(review_entity_1.Review);
+    const review = new review_entity_1.Review();
+    review.imdbID = data.imdbID;
+    review.audio = data.audio;
+    return yield reviewRepository.save(review);
+});
+exports.insertReview = insertReview;
 function getReviewsFromDatabase() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
