@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.convertToMovieFullEntity = exports.convertToMovieFullInterface = void 0;
+exports.convertToReviewInterface = exports.convertToReviewEntity = exports.convertToMovieFullEntity = exports.convertToMovieFullInterface = void 0;
 const movie_entity_1 = require("../entities/movie.entity");
 const rating_entity_1 = require("../entities/rating.entity");
+const review_entity_1 = require("../entities/review.entity");
 const convertToMovieFullInterface = (response) => {
     return {
         Title: response.Title,
@@ -76,3 +77,19 @@ const convertToMovieFullEntity = (moviefull) => {
     return movieEntity;
 };
 exports.convertToMovieFullEntity = convertToMovieFullEntity;
+const convertToReviewEntity = (review) => {
+    const reviewEntity = new review_entity_1.Review();
+    reviewEntity.id = review.id;
+    reviewEntity.imdbID = review.imdbID;
+    reviewEntity.audio = review.audio;
+    return reviewEntity;
+};
+exports.convertToReviewEntity = convertToReviewEntity;
+const convertToReviewInterface = (response) => {
+    return {
+        id: response.id,
+        imdbID: response.imdbID,
+        audio: response.audio
+    };
+};
+exports.convertToReviewInterface = convertToReviewInterface;

@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const MovieController_1 = __importDefault(require("./controllers/MovieController"));
+const ReviewController_1 = __importDefault(require("./controllers/ReviewController"));
 require("reflect-metadata");
 const datasource_1 = require("./repository/datasource");
 datasource_1.AppDataSource.initialize()
@@ -26,6 +27,7 @@ app.use((0, cors_1.default)({
     allowedHeaders: ['Content-Type'],
 }));
 app.use('/api', MovieController_1.default);
+app.use('/api', ReviewController_1.default);
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });

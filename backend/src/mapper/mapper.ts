@@ -3,6 +3,9 @@ import MovieFullInterface from "../interfaces/Movie.full.interface";
 import MovieInterface from "../interfaces/Movie.interface";
 import { Movie } from "../entities/movie.entity";
 import { Rating } from "../entities/rating.entity";
+import ReviewInterface from "../interfaces/Review.interface.";
+import { Review } from "../entities/review.entity";
+
 
 export const convertToMovieFullInterface = (response: any): MovieFullInterface => {
     return {
@@ -38,8 +41,8 @@ export const convertToMovieFullInterface = (response: any): MovieFullInterface =
     };
 };
 
-export const convertToMovieFullEntity = (moviefull: MovieFullInterface): Movie => {
 
+export const convertToMovieFullEntity = (moviefull: MovieFullInterface): Movie => {
     const movieEntity = new Movie();
     movieEntity.title = moviefull.Title;
     movieEntity.year = moviefull.Year;
@@ -80,3 +83,22 @@ export const convertToMovieFullEntity = (moviefull: MovieFullInterface): Movie =
 
     return movieEntity;
 };
+
+
+export const convertToReviewEntity = (review: ReviewInterface): Review => {
+    const reviewEntity = new Review();
+    reviewEntity.id = review.id;
+    reviewEntity.imdbID = review.imdbID;
+    reviewEntity.audio = review.audio;
+    return reviewEntity;
+};
+
+export const convertToReviewInterface = (response: any): ReviewInterface => {
+    return{
+        id: response.id,
+        imdbID: response.imdbID,
+        audio: response.audio
+    };
+}
+
+

@@ -2,6 +2,7 @@ import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import movieRouter from './controllers/MovieController'; 
+import reviewRouter from './controllers/ReviewController'; 
 import 'reflect-metadata';  
 import { AppDataSource } from './repository/datasource'; 
 
@@ -29,6 +30,7 @@ app.use(
 );
 
 app.use('/api', movieRouter);
+app.use('/api', reviewRouter);
 
 app.listen(port, (): void => {
   console.log(`Server running on port ${port}`);
