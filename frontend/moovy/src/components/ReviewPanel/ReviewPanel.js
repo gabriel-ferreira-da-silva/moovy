@@ -16,6 +16,7 @@ export default function ReviewPanel({movie,isPanelOpen,setIsPanelOpen}){
         <div className={style.panel}>
           <div className={style.panelContent}>
             <h3>Audio Review for {movie.title}</h3>
+            <img className={style.posterImg} src={movie.poster}></img>
             {
                 review?
                 <div></div>

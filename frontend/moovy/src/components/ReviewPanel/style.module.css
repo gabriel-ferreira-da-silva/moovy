@@ -8,10 +8,12 @@
     height: 100vh;
     background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     z-index: 1000; /* Ensure it's on top of other elements */
   }
+  
   
   .panelContent {
     background: white;
@@ -22,6 +24,11 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
   
+  .posterImg{
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+  }
   .closeButton {
     margin-top: 20px;
     background: var(--red);

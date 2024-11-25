@@ -95,7 +95,7 @@ export default function AudioRecordPanel({movie}) {
             </div>
 
             {audioURL && (
-                <div>
+                <div className={style.audioPlayer}>
                     <h2>Playback</h2>
                     <audio src={audioURL} controls></audio>
                     <div     onClick={saveRecording} className={style.appButton}>
