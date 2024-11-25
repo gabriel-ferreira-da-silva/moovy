@@ -15,8 +15,10 @@ export default function MovieFullCard({movie, callBack}){
                     <img src={starIcon} className={style.ratingIcon}></img>
                     <div className={style.rating}>{movie.imdbRating}</div>
                 </div>
-                
             </div>
+            <div className={style.audioHolder} onClick={() => console.log("hello")}>
+                    play review
+                </div>
             <div className={style.deleteButton} onClick={() => callBack(movie.imdbID)}>
                 delete
             </div>

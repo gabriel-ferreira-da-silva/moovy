@@ -72,6 +72,35 @@
 }
 
 
+
+
+.audioHolder{
+    display: flex;
+    padding: 3px;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    background-color: white;
+    border: solid;
+    border-width: 2px;
+    color: var(--gray);
+    border-radius: 5px;
+    margin-bottom: 5px;
+}
+
+.audioHolder:hover{
+    color:black;
+    border-color: black;
+}
+
+.audioHolder:active{
+    background-color: var(--gray);
+    color:white;
+    border-color: white;
+}
+
+
+
 .deleteButton{
     display: flex;
     padding: 3px;

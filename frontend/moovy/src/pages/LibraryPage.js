@@ -52,6 +52,7 @@ export default function LibraryPage() {
 
   return (
     <div>
+
       {showMessage && message}
 
       <SearchPanel pageText="My Library" setTitle={setTitle} SearchCall={fetchMoviesWrapper} />
@@ -65,9 +66,10 @@ export default function LibraryPage() {
                 <OrbitProgress dense color="#f5af22" size="large" text="" textColor="" />
               </div>
               :
-              <MoviesFullPanel movies={movies} movieCardCallback={deleteMovieWrapper}/>
+              <MoviesFullPanel movies={movies} movieFullCardCallBack={deleteMovieWrapper}/>
             }
           </div>
+
         ) : (
           <NoResultsPanel
             message="Nenhum filme com este título foi encontrado ou você pesquisou usando termos inválidos"
