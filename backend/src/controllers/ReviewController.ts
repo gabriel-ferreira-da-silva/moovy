@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import multer from 'multer';
 import { fetchReviewsFromDatabase } from '../services/ReviewService';
+import { fetchReviewFromDatabase } from '../services/ReviewService';
 import { insertReviewInDatabase } from '../services/ReviewService';
 dotenv.config();
 
@@ -11,6 +12,19 @@ const upload = multer();
 router.get('/reviews', async (req: Request, res: Response): Promise<void> => {
     try {
         const response = await fetchReviewsFromDatabase();
+        res.status(200).json(response); 
+    } catch (error) {
+        console.error('Error in /movies route:', error);
+        res.status(500).json({ message: 'Failed to fetch movies' }); 
+    }
+});
+
+
+
+router.get('/reviews/:imdbID', async (req: Request, res: Response): Promise<void> => {
+    try {
+        const {imdbID} = req.params;
+        const response = await fetchReviewFromDatabase(imdbID);
         res.status(200).json(response); 
     } catch (error) {
         console.error('Error in /movies route:', error);

@@ -17,12 +17,24 @@ const dotenv_1 = __importDefault(require("dotenv"));
 const multer_1 = __importDefault(require("multer"));
 const ReviewService_1 = require("../services/ReviewService");
 const ReviewService_2 = require("../services/ReviewService");
+const ReviewService_3 = require("../services/ReviewService");
 dotenv_1.default.config();
 const router = (0, express_1.Router)();
 const upload = (0, multer_1.default)();
 router.get('/reviews', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const response = yield (0, ReviewService_1.fetchReviewsFromDatabase)();
+        res.status(200).json(response);
+    }
+    catch (error) {
+        console.error('Error in /movies route:', error);
+        res.status(500).json({ message: 'Failed to fetch movies' });
+    }
+}));
+router.get('/reviews/:imdbID', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { imdbID } = req.params;
+        const response = yield (0, ReviewService_2.fetchReviewFromDatabase)(imdbID);
         res.status(200).json(response);
     }
     catch (error) {
@@ -42,7 +54,7 @@ router.post('/reviews', upload.single('audio'), (req, res) => __awaiter(void 0, 
             return;
         }
         // Insert into database
-        const postResponse = yield (0, ReviewService_2.insertReviewInDatabase)({ imdbID, audio });
+        const postResponse = yield (0, ReviewService_3.insertReviewInDatabase)({ imdbID, audio });
         res.status(200).json({ result: postResponse, success: true });
     }
     catch (error) {

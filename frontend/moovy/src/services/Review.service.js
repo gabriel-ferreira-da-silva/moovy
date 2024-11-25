@@ -25,3 +25,14 @@ export const fetchReviewsFromLibrary = async () => {
         return null;
     }
 };
+
+
+export const fetchReviewFromLibrary = async (imdbID) => {
+    try {
+        const response = await axios.get('http://localhost:4000/api/reviews/'+imdbID);
+        return response.data; 
+    } catch (error) {
+        console.error('Error fetching reviews from library:', error);
+        return null;
+    }
+};

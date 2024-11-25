@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.insertReviewInDatabase = exports.fetchReviewsFromDatabase = void 0;
+exports.fetchReviewFromDatabase = exports.insertReviewInDatabase = exports.fetchReviewsFromDatabase = void 0;
 const review_repository_1 = require("../repository/review.repository");
 const mapper_1 = require("../mapper/mapper");
 const fetchReviewsFromDatabase = () => __awaiter(void 0, void 0, void 0, function* () {
@@ -23,3 +23,8 @@ const insertReviewInDatabase = (reviewJSON) => __awaiter(void 0, void 0, void 0,
     return data;
 });
 exports.insertReviewInDatabase = insertReviewInDatabase;
+const fetchReviewFromDatabase = (imdbID) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = yield (0, review_repository_1.getReviewFromDatabase)(imdbID);
+    return data;
+});
+exports.fetchReviewFromDatabase = fetchReviewFromDatabase;

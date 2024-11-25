@@ -55,9 +55,8 @@ export default function AudioRecordPanel({movie}) {
     
                 
                 const formData = new FormData();
-                formData.append('imdbID', movie.imdbID); // Pass movie's imdbID
-                formData.append('audio', audioBlob, 'recording.wav'); // Append audio blob with filename
-    
+                formData.append('imdbID', movie.imdbID);
+                formData.append('audio', audioBlob, 'recording.wav');
                 
                 const result = await saveReviewInLibrary(formData);
     
@@ -98,7 +97,7 @@ export default function AudioRecordPanel({movie}) {
                 <div className={style.audioPlayer}>
                     <h2>Playback</h2>
                     <audio src={audioURL} controls></audio>
-                    <div     onClick={saveRecording} className={style.appButton}>
+                    <div onClick={saveRecording} className={style.appButton}>
                         <img src={saveIcon}></img>
                     </div>
                 </div>

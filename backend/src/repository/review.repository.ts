@@ -25,3 +25,17 @@ export async function getReviewsFromDatabase() {
         return { message: "Failed to fetch movies from repository level", error: error };
     }
 }
+
+
+export async function getReviewFromDatabase(imdbID:string) {
+    try {
+        const reviewRepository = AppDataSource.getRepository(Review);
+        const reviews = await reviewRepository.find({
+            where:{imdbID:imdbID}
+        });
+
+        return { result: reviews };
+    } catch (error) {
+        return { message: "Failed to fetch movies from repository level", error: error };
+    }
+}

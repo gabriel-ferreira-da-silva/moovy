@@ -11,6 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.insertReview = void 0;
 exports.getReviewsFromDatabase = getReviewsFromDatabase;
+exports.getReviewFromDatabase = getReviewFromDatabase;
 const datasource_1 = require("./datasource");
 const review_entity_1 = require("../entities/review.entity");
 const insertReview = (data) => __awaiter(void 0, void 0, void 0, function* () {
@@ -26,6 +27,20 @@ function getReviewsFromDatabase() {
         try {
             const reviewRepository = datasource_1.AppDataSource.getRepository(review_entity_1.Review);
             const reviews = yield reviewRepository.find();
+            return { result: reviews };
+        }
+        catch (error) {
+            return { message: "Failed to fetch movies from repository level", error: error };
+        }
+    });
+}
+function getReviewFromDatabase(imdbID) {
+    return __awaiter(this, void 0, void 0, function* () {
+        try {
+            const reviewRepository = datasource_1.AppDataSource.getRepository(review_entity_1.Review);
+            const reviews = yield reviewRepository.find({
+                where: { imdbID: imdbID }
+            });
             return { result: reviews };
         }
         catch (error) {
