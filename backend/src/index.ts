@@ -1,8 +1,8 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import movieRouter from './controllers/MovieController'; 
-import reviewRouter from './controllers/ReviewController'; 
+import movieRouter from './modules/movies/MovieController'; 
+import reviewRouter from './modules/reviews/ReviewController'; 
 import 'reflect-metadata';  
 import { AppDataSource } from './repository/datasource'; 
 

@@ -1,9 +1,9 @@
 import { Router, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import multer from 'multer';
-import { fetchReviewsFromDatabase } from '../services/ReviewService';
-import { fetchReviewFromDatabase } from '../services/ReviewService';
-import { insertReviewInDatabase } from '../services/ReviewService';
+import { fetchReviewsFromDatabase } from './ReviewService';
+import { fetchReviewFromDatabase } from './ReviewService';
+import { insertReviewInDatabase } from './ReviewService';
 dotenv.config();
 
 const router = Router();

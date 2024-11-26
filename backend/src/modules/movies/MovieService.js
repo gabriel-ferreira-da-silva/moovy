@@ -14,11 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchRandomMovies = exports.insertMovieInDatabase = exports.removeMovieFromDatabase = exports.fetchMoviesFromDatabase = exports.fetchMovieSearch = exports.fetchMovieByImdbID = void 0;
 const axios_1 = __importDefault(require("axios"));
-const commom_utils_1 = require("../utils/commom-utils");
-const movie_repository_1 = require("../repository/movie.repository");
-const movie_repository_2 = require("../repository/movie.repository");
-const movie_repository_3 = require("../repository/movie.repository");
-const mapper_1 = require("../mapper/mapper");
+const commom_utils_1 = require("../../utils/commom-utils");
+const movie_repository_1 = require("./movie.repository");
+const movie_repository_2 = require("./movie.repository");
+const movie_repository_3 = require("./movie.repository");
+const mapper_1 = require("../../mapper/mapper");
 const fetchMovieByImdbID = (imdbID) => __awaiter(void 0, void 0, void 0, function* () {
     const apiKey = process.env.OMDB_API_KEY;
     if (!apiKey) {

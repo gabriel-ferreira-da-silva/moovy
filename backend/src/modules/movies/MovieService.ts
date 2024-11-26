@@ -1,11 +1,11 @@
 import axios from 'axios';
-import { randomStringGenerator } from '../utils/commom-utils';
-import MovieResponse from '../interfaces/MovieResponse.interface';
-import MovieFull from '../interfaces/Movie.full.interface';
-import { insertMovie } from '../repository/movie.repository';
-import { getMoviesFromDatabase } from '../repository/movie.repository';
-import { deleteMovieFromDatabase } from '../repository/movie.repository';
-import { convertToMovieFullInterface } from '../mapper/mapper';
+import { randomStringGenerator } from '../../utils/commom-utils';
+import MovieResponse from './MovieResponse.interface';
+import MovieFull from './Movie.full.interface';
+import { insertMovie } from './movie.repository';
+import { getMoviesFromDatabase } from './movie.repository';
+import { deleteMovieFromDatabase } from './movie.repository';
+import { convertToMovieFullInterface } from '../../mapper/mapper';
 
 export const fetchMovieByImdbID =  async (imdbID:string): Promise< MovieFull | null> =>{
     const apiKey = process.env.OMDB_API_KEY;

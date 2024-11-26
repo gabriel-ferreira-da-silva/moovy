@@ -1,10 +1,10 @@
 import { Router, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import { fetchRandomMovies, removeMovieFromDatabase} from '../services/MovieService';
-import { fetchMovieByImdbID} from '../services/MovieService';
-import { insertMovieInDatabase } from '../services/MovieService';
-import { fetchMovieSearch } from '../services/MovieService';
-import { fetchMoviesFromDatabase } from '../services/MovieService';
+import { fetchRandomMovies, removeMovieFromDatabase} from './MovieService';
+import { fetchMovieByImdbID} from './MovieService';
+import { insertMovieInDatabase } from './MovieService';
+import { fetchMovieSearch } from './MovieService';
+import { fetchMoviesFromDatabase } from './MovieService';
 
 dotenv.config();
 

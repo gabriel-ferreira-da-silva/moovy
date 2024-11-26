@@ -12,14 +12,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.insertMovie = insertMovie;
 exports.getMoviesFromDatabase = getMoviesFromDatabase;
 exports.deleteMovieFromDatabase = deleteMovieFromDatabase;
-const datasource_1 = require("./datasource");
-const movie_entity_1 = require("../entities/movie.entity");
-const mapper_1 = require("../mapper/mapper");
+const datasource_1 = require("../../repository/datasource");
+const movie_entity_1 = require("./movie.entity");
+const mapper_1 = require("../../mapper/mapper");
+const movieRepository = datasource_1.AppDataSource.getRepository(movie_entity_1.Movie);
 function insertMovie(movieFullInterface) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             let movie = (0, mapper_1.convertToMovieFullEntity)(movieFullInterface);
-            const movieRepository = datasource_1.AppDataSource.getRepository(movie_entity_1.Movie);
             const result = yield movieRepository.save(movie);
             return { result: true };
         }
@@ -31,7 +31,6 @@ function insertMovie(movieFullInterface) {
 function getMoviesFromDatabase() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const movieRepository = datasource_1.AppDataSource.getRepository(movie_entity_1.Movie);
             const movies = yield movieRepository.find();
             return { result: movies };
         }
@@ -43,7 +42,6 @@ function getMoviesFromDatabase() {
 function deleteMovieFromDatabase(imdbID) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const movieRepository = datasource_1.AppDataSource.getRepository(movie_entity_1.Movie);
             const result = yield movieRepository.delete({ imdbID });
             if (result.affected === 0) {
                 return { message: `No movie found with imdbID: ${imdbID}`, result };

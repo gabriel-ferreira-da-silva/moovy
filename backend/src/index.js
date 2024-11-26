@@ -6,8 +6,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const dotenv_1 = __importDefault(require("dotenv"));
-const MovieController_1 = __importDefault(require("./controllers/MovieController"));
-const ReviewController_1 = __importDefault(require("./controllers/ReviewController"));
+const MovieController_1 = __importDefault(require("./modules/movies/MovieController"));
+const ReviewController_1 = __importDefault(require("./modules/reviews/ReviewController"));
 require("reflect-metadata");
 const datasource_1 = require("./repository/datasource");
 datasource_1.AppDataSource.initialize()

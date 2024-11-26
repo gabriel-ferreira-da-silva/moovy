@@ -1,7 +1,7 @@
 import { DataSource } from 'typeorm';
-import { Movie } from '../entities/movie.entity';
-import { Rating } from '../entities/rating.entity';
-import { Review } from '../entities/review.entity'; 
+import { Movie } from '../modules/movies/movie.entity';
+import { Rating } from '../modules/movies/rating.entity';
+import { Review } from '../modules/reviews/review.entity'; 
 
 export const AppDataSource = new DataSource({
     type: 'postgres',

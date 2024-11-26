@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppDataSource = void 0;
 const typeorm_1 = require("typeorm");
-const movie_entity_1 = require("../entities/movie.entity");
-const rating_entity_1 = require("../entities/rating.entity");
-const review_entity_1 = require("../entities/review.entity");
+const movie_entity_1 = require("../modules/movies/movie.entity");
+const rating_entity_1 = require("../modules/movies/rating.entity");
+const review_entity_1 = require("../modules/reviews/review.entity");
 exports.AppDataSource = new typeorm_1.DataSource({
     type: 'postgres',
     host: 'localhost',

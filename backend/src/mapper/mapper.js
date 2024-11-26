@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.convertToReviewInterface = exports.convertToReviewEntity = exports.convertToMovieFullEntity = exports.convertToMovieFullInterface = void 0;
-const movie_entity_1 = require("../entities/movie.entity");
-const rating_entity_1 = require("../entities/rating.entity");
-const review_entity_1 = require("../entities/review.entity");
+const movie_entity_1 = require("../modules/movies/movie.entity");
+const rating_entity_1 = require("../modules/movies/rating.entity");
+const review_entity_1 = require("../modules/reviews/review.entity");
 const convertToMovieFullInterface = (response) => {
     return {
         Title: response.Title,

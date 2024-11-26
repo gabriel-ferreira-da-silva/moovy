@@ -1,5 +1,5 @@
-import { insertReview, getReviewsFromDatabase, getReviewFromDatabase } from '../repository/review.repository';
-import { convertToReviewInterface } from '../mapper/mapper';
+import { insertReview, getReviewsFromDatabase, getReviewFromDatabase } from './review.repository';
+import { convertToReviewInterface } from '../../mapper/mapper';
 
 
 export const fetchReviewsFromDatabase = async (): Promise<any> => {

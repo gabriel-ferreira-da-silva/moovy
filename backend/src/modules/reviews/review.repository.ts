@@ -1,7 +1,7 @@
-import { AppDataSource } from './datasource';
-import { Review } from '../entities/review.entity';
-import ReviewInterface from '../interfaces/Review.interface.'
-import { convertToReviewEntity } from '../mapper/mapper';
+import { AppDataSource } from '../../repository/datasource';
+import { Review } from './review.entity';
+import ReviewInterface from './Review.interface.'
+import { convertToReviewEntity } from '../../mapper/mapper';
 
 
 export const insertReview = async (data: { imdbID: string; audio: Buffer }) => {

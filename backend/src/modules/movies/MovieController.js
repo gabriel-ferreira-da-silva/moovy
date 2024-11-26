@@ -14,11 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const dotenv_1 = __importDefault(require("dotenv"));
-const MovieService_1 = require("../services/MovieService");
-const MovieService_2 = require("../services/MovieService");
-const MovieService_3 = require("../services/MovieService");
-const MovieService_4 = require("../services/MovieService");
-const MovieService_5 = require("../services/MovieService");
+const MovieService_1 = require("./MovieService");
+const MovieService_2 = require("./MovieService");
+const MovieService_3 = require("./MovieService");
+const MovieService_4 = require("./MovieService");
+const MovieService_5 = require("./MovieService");
 dotenv_1.default.config();
 const router = (0, express_1.Router)();
 router.get('/movies', (req, res) => __awaiter(void 0, void 0, void 0, function* () {

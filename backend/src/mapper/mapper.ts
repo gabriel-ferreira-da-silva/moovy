@@ -1,10 +1,10 @@
-import MovieResponseInterface from "../interfaces/MovieResponse.interface";
-import MovieFullInterface from "../interfaces/Movie.full.interface";
-import MovieInterface from "../interfaces/Movie.interface";
-import { Movie } from "../entities/movie.entity";
-import { Rating } from "../entities/rating.entity";
-import ReviewInterface from "../interfaces/Review.interface.";
-import { Review } from "../entities/review.entity";
+import MovieResponseInterface from "../modules/movies/MovieResponse.interface";
+import MovieFullInterface from "../modules/movies/Movie.full.interface";
+import MovieInterface from "../modules/movies/Movie.interface";
+import { Movie } from "../modules/movies/movie.entity";
+import { Rating } from "../modules/movies/rating.entity";
+import ReviewInterface from "../modules/reviews/Review.interface.";
+import { Review } from "../modules/reviews/review.entity";
 
 
 export const convertToMovieFullInterface = (response: any): MovieFullInterface => {

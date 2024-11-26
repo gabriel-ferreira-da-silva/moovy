@@ -10,8 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.fetchReviewFromDatabase = exports.insertReviewInDatabase = exports.fetchReviewsFromDatabase = void 0;
-const review_repository_1 = require("../repository/review.repository");
-const mapper_1 = require("../mapper/mapper");
+const review_repository_1 = require("./review.repository");
+const mapper_1 = require("../../mapper/mapper");
 const fetchReviewsFromDatabase = () => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield (0, review_repository_1.getReviewsFromDatabase)();
     return response;

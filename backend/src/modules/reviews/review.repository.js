@@ -12,8 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.insertReview = void 0;
 exports.getReviewsFromDatabase = getReviewsFromDatabase;
 exports.getReviewFromDatabase = getReviewFromDatabase;
-const datasource_1 = require("./datasource");
-const review_entity_1 = require("../entities/review.entity");
+const datasource_1 = require("../../repository/datasource");
+const review_entity_1 = require("./review.entity");
 const insertReview = (data) => __awaiter(void 0, void 0, void 0, function* () {
     const reviewRepository = datasource_1.AppDataSource.getRepository(review_entity_1.Review);
     const review = new review_entity_1.Review();
